@@ -47,6 +47,32 @@ services:
       - ./book_data:/opt/spark/data
       - ./spark_apps:/opt/spark/apps
       - spark-logs:/opt/spark/spark-events
+  
+  # clickhouse
+  clickhouse_server:
+    container_name: clickhouse-server
+    image: clickhouse/clickhouse-server:latest
+    restart: always
+    environment:
+      POSTGRES_USER: ${CLICKHOUSE_USER}
+      POSTGRES_PASSWORD: ${CLICKHOUSE_PASSWORD}
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "256M"
+    volumes:
+      - "./compose/graphite_rollup.xml:/etc/clickhouse-server/config.d/graphite_rollup.xml"
+      - "./compose/clickhouse_metrics.xml:/etc/clickhouse-server/config.d/clickhouse_metrics.xml"
+      - "./compose/init.sql:/docker-entrypoint-initdb.d/init.sql"
+      - "./data/clickhouse/:/var/lib/clickhouse/"
+      - "./data/clickhouse/:/var/log/clickhouse-server/"
+    ports:
+      - "8123:8123"
+    profiles:
+      - clickhouse
+    networks:
+      - datastack
 
 volumes:
   spark-logs:
