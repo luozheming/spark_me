@@ -47,11 +47,11 @@ services:
       - ./book_data:/opt/spark/data
       - ./spark_apps:/opt/spark/apps
       - spark-logs:/opt/spark/spark-events
-  
+
   # clickhouse
   clickhouse_server:
     container_name: clickhouse-server
-    image: clickhouse/clickhouse-server:latest
+    image: yandex/clickhouse-server
     restart: always
     environment:
       POSTGRES_USER: ${CLICKHOUSE_USER}
