@@ -71,8 +71,6 @@ services:
       - "8123:8123"
     profiles:
       - clickhouse
-    networks:
-      - datastack
 
 volumes:
   spark-logs:
