@@ -54,6 +54,8 @@ services:
     ports:
       - '9090:8080'
       - '7077:7077'
+    profiles:
+      - spark
     networks:
       - datastack
 
@@ -69,6 +71,8 @@ services:
       - env/.env
     ports:
       - '18080:18080'
+    profiles:
+      - spark
     networks:
       - datastack
 
@@ -84,6 +88,8 @@ services:
     volumes:
       - ./book_data:/opt/spark/data
       - ./spark_apps:/opt/spark/apps
+    profiles:
+      - spark
     networks:
       - datastack
 
