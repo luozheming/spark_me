@@ -7,11 +7,10 @@ server:
     min-response-size: 1024
   error:
     include-exception: true
-    include-stacktrace: on-trace-param
     path: /error
     whitelabel:
       enabled: true
-  port: 9001
+  port: 9002
   servlet:
     context-path: /
     session:
